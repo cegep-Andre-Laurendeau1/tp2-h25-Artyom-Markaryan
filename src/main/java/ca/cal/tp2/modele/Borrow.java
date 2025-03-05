@@ -1,15 +1,16 @@
 package ca.cal.tp2.modele;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Borrow {
     private final LocalDate borrowDate;
-    private final int totalDocuments;
+    private final List<BorrowedDocument> borrowedDocuments;
     private String status;
 
-    public Borrow(LocalDate borrowDate, int totalItems, String status) {
+    public Borrow(LocalDate borrowDate, List<BorrowedDocument> borrowedDocuments, String status) {
         this.borrowDate = borrowDate;
-        this.totalDocuments = totalItems;
+        this.borrowedDocuments = borrowedDocuments;
         this.status = status;
     }
 
@@ -17,8 +18,12 @@ public class Borrow {
         return borrowDate;
     }
 
+    public List<BorrowedDocument> getBorrowedDocuments() {
+        return borrowedDocuments;
+    }
+
     public int getTotalDocuments() {
-        return totalDocuments;
+        return borrowedDocuments.size();
     }
 
     public String getStatus() {
