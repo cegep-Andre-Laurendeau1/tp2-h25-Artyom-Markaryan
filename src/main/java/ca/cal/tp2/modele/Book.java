@@ -7,8 +7,8 @@ public class Book extends Document {
     private final int pages;
     private static final int BORROW_DURATION = 3;
 
-    public Book(String title, String author, LocalDate datePublished, String documentType, int copies, String editor, int pages) {
-        super(title, author, datePublished, documentType, copies);
+    public Book(String title, String author, LocalDate datePublished, int copies, String editor, int pages) {
+        super(title, author, datePublished, copies);
         this.editor = editor;
         this.pages = pages;
     }

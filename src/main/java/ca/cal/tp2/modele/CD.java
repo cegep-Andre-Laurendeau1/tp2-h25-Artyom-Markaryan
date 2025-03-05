@@ -7,8 +7,8 @@ public class CD extends Document {
     private final String genre;
     private static final int BORROW_DURATION = 2;
 
-    public CD(String title, String author, LocalDate datePublished, String documentType, int copies, int duration, String genre) {
-        super(title, author, datePublished, documentType, copies);
+    public CD(String title, String author, LocalDate datePublished, int copies, int duration, String genre) {
+        super(title, author, datePublished, copies);
         this.duration = duration;
         this.genre = genre;
     }

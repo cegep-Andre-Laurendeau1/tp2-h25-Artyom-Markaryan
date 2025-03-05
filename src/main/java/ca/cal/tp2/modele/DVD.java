@@ -7,8 +7,8 @@ public class DVD extends Document {
     private final int rating;
     private static final int BORROW_DURATION = 1;
 
-    public DVD(String title, String author, LocalDate datePublished, String documentType, int copies, int duration, int rating) {
-        super(title, author, datePublished, documentType, copies);
+    public DVD(String title, String author, LocalDate datePublished, int copies, int duration, int rating) {
+        super(title, author, datePublished, copies);
         this.duration = duration;
         this.rating = rating;
     }
