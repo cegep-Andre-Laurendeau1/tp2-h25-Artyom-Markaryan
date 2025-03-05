@@ -6,13 +6,11 @@ public abstract class Document {
     protected String title;
     protected String author;
     protected LocalDate datePublished;
-    protected int copies;
 
-    public Document(String title, String author, LocalDate datePublished, int copies) {
+    public Document(String title, String author, LocalDate datePublished) {
         this.title = title;
         this.author = author;
         this.datePublished = datePublished;
-        this.copies = copies;
     }
 
     public String getTitle() {
@@ -25,9 +23,5 @@ public abstract class Document {
 
     public LocalDate getDatePublished() {
         return datePublished;
-    }
-
-    public int getCopies() {
-        return copies;
     }
 }
