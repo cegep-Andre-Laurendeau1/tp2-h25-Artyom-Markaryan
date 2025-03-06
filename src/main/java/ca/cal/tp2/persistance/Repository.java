@@ -1,8 +1,8 @@
 package ca.cal.tp2.persistance;
 
-import java.sql.SQLException;
+import ca.cal.tp2.exception.DatabaseException;
 
 public interface Repository<T> {
-    boolean save(T document) throws SQLException;
-    T findById(int id) throws SQLException;
+    void save(T document) throws DatabaseException;
+    T findById(int id) throws DatabaseException;
 }

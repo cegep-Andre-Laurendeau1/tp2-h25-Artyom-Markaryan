@@ -1,16 +1,16 @@
 package ca.cal.tp2.persistance;
 
 import ca.cal.tp2.modele.Document;
-import java.sql.SQLException;
+import ca.cal.tp2.exception.DatabaseException;
 
 public class DocumentRepository implements Repository<Document> {
     @Override
-    public boolean save(Document document) throws SQLException {
-        return false;
+    public void save(Document document) throws DatabaseException {
+
     }
 
     @Override
-    public Document findById(int id) throws SQLException {
+    public Document findById(int id) throws DatabaseException {
         return null;
     }
 }

@@ -1,20 +1,34 @@
 package ca.cal.tp2.modele;
 
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
 import java.util.List;
+import java.util.ArrayList;
 
+@Entity
+@NoArgsConstructor
+@Getter
 public class Borrower extends User {
-    private List<Borrow> borrowsList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Borrow> borrowsList = new ArrayList<>();
+
+    @Column(name = "FINESBALANCE")
     private double finesBalance;
 
     public Borrower(String firstName, String lastName, String email, String phoneNumber) {
         super(firstName, lastName, email, phoneNumber);
     }
 
-    public List<Borrow> getBorrowsList() {
-        return borrowsList;
-    }
-
-    public double getFinesBalance() {
-        return finesBalance;
+    @Override
+    public String toString() {
+        return "Emprunteur {" +
+                " Prénom: " + super.firstName +
+                ", Nom: " + super.lastName +
+                " }";
     }
 }
