@@ -13,8 +13,8 @@ public class Borrower extends User {
     @OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Borrow> borrowsList = new ArrayList<>();
 
-    @Column(name = "FINESBALANCE")
-    private double finesBalance;
+    @OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Fine> finesList = new ArrayList<>();
 
     public Borrower(String firstName, String lastName, String email, String phoneNumber) {
         super(firstName, lastName, email, phoneNumber);
