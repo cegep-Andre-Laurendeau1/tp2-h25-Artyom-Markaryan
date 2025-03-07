@@ -1,20 +1,20 @@
 package ca.cal.tp2.persistance;
 
-import ca.cal.tp2.modele.Borrower;
+import ca.cal.tp2.modele.Librarian;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import ca.cal.tp2.exception.DatabaseException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
-public class BorrowerRepository implements Repository<Borrower> {
+public class LibrarianRepository implements Repository<Librarian> {
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("library.pu");
 
     @Override
-    public void save(Borrower borrower) throws DatabaseException {
+    public void save(Librarian librarian) throws DatabaseException {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.persist(borrower);
+            em.persist(librarian);
             em.getTransaction().commit();
         }
         catch (RuntimeException e) {
@@ -23,10 +23,10 @@ public class BorrowerRepository implements Repository<Borrower> {
     }
 
     @Override
-    public Borrower findById(int id) throws DatabaseException {
+    public Librarian findById(int id) throws DatabaseException {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Borrower> query = em.createQuery(
-                "SELECT b FROM Borrower b WHERE b.id = :id", Borrower.class
+            TypedQuery<Librarian> query = em.createQuery(
+                "SELECT l FROM Librarian l WHERE l.id = :id", Librarian.class
             );
             query.setParameter("id", id);
             return query.getSingleResult();

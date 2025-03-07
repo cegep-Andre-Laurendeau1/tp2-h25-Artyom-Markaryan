@@ -1,39 +1,37 @@
 package ca.cal.tp2;
 
-import ca.cal.tp2.exception.DatabaseException;
 import java.sql.SQLException;
 import ca.cal.tp2.service.LibrarianService;
-import ca.cal.tp2.modele.Book;
-import ca.cal.tp2.modele.CD;
-import ca.cal.tp2.modele.DVD;
-import java.time.LocalDate;
 import ca.cal.tp2.service.BorrowerService;
-import ca.cal.tp2.modele.Borrower;
+import ca.cal.tp2.modele.*;
+import java.time.LocalDate;
+import ca.cal.tp2.exception.DatabaseException;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException, SQLException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
         TcpServer.createTcpServer();
-//        LibrarianService librarianService = new LibrarianService();
-//        librarianService.addLibraryDocument(
-//            new Book("Livre Exemple", "Auteur", LocalDate.of(2025, 1, 1), "Éditeur", 100)
-//        );
-//        librarianService.addLibraryDocument(
-//            new CD("CD Exemple", "Artiste", LocalDate.of(2025, 1, 1), 240, "Acoustique")
-//        );
-//        librarianService.addLibraryDocument(
-//            new DVD("DVD Exemple", "Directeur", LocalDate.of(2025, 1, 1), 7200, 10)
-//        );
+        LibrarianService librarianService = new LibrarianService();
         BorrowerService borrowerService = new BorrowerService();
         try {
+            librarianService.addLibrarian(
+                new Librarian("Bibliothécaire", "Exemple", "courriel@exemple.com", "000-000-0000")
+            );
+            System.out.println(librarianService.getLibrarian(1));
+//            librarianService.addDocument(
+//                new Book("Livre Exemple", "Auteur", LocalDate.of(2025, 1, 1), "Éditeur", 100)
+//            );
+//            librarianService.addDocument(
+//                new CD("CD Exemple", "Artiste", LocalDate.of(2025, 1, 1), 240, "Acoustique")
+//            );
+//            librarianService.addDocument(
+//                new DVD("DVD Exemple", "Directeur", LocalDate.of(2025, 1, 1), 7200, 10)
+//            );
             borrowerService.addBorrower(
                 new Borrower("Emprunteur", "Exemple", "courriel@exemple.com", "000-000-0000")
             );
-        } catch (DatabaseException e) {
-            System.out.println("Erreur avec la base de données: " + e.getMessage());
+            System.out.println(borrowerService.getBorrower(2));
         }
-        try {
-            System.out.println(borrowerService.getBorrower(1));
-        } catch (DatabaseException e) {
+        catch (DatabaseException e) {
             System.out.println("Erreur avec la base de données: " + e.getMessage());
         }
 

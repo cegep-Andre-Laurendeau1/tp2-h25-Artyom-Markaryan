@@ -10,10 +10,6 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Getter
 public class Borrower extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
     @OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Borrow> borrowsList = new ArrayList<>();
 
@@ -29,6 +25,8 @@ public class Borrower extends User {
         return "Emprunteur {" +
                 " Prénom: " + super.firstName +
                 ", Nom: " + super.lastName +
+                ", Courriel: " + super.email +
+                ", Numéro de Téléphone: " + super.phoneNumber +
                 " }";
     }
 }
