@@ -17,15 +17,18 @@ public class Main {
                 new Librarian("Bibliothécaire", "Exemple", "courriel@exemple.com", "000-000-0000")
             );
             System.out.println(librarianService.getLibrarian(1));
-//            librarianService.addDocument(
-//                new Book("Livre Exemple", "Auteur", LocalDate.of(2025, 1, 1), "Éditeur", 100)
-//            );
-//            librarianService.addDocument(
-//                new CD("CD Exemple", "Artiste", LocalDate.of(2025, 1, 1), 240, "Acoustique")
-//            );
-//            librarianService.addDocument(
-//                new DVD("DVD Exemple", "Directeur", LocalDate.of(2025, 1, 1), 7200, 10)
-//            );
+            librarianService.addDocument(
+                new Book("Livre Exemple", "Auteur", LocalDate.of(2025, 1, 1), "Éditeur", 100)
+            );
+            System.out.println(librarianService.getDocumentById(1));
+            librarianService.addDocument(
+                new CD("CD Exemple", "Artiste", LocalDate.of(2025, 1, 1), 240, "Acoustique")
+            );
+            System.out.println(librarianService.getDocumentById(2));
+            librarianService.addDocument(
+                new DVD("DVD Exemple", "Directeur", LocalDate.of(2025, 1, 1), 7200, 10)
+            );
+            System.out.println(librarianService.getDocumentById(3));
             borrowerService.addBorrower(
                 new Borrower("Emprunteur", "Exemple", "courriel@exemple.com", "000-000-0000")
             );

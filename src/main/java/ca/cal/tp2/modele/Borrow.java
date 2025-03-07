@@ -17,11 +17,11 @@ public class Borrow {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "BORROWERID")
     private Borrower borrower;
 
     @OneToMany(mappedBy = "borrow", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BorrowedDocument> borrowedDocuments = new ArrayList<>();
+    private List<BorrowDetails> borrowDetailsList = new ArrayList<>();
 
     @Column(name = "BORROWDATE")
     private LocalDate borrowDate;
@@ -29,14 +29,14 @@ public class Borrow {
     @Column(name = "STATUS")
     private String status;
 
-    public Borrow(LocalDate borrowDate, List<BorrowedDocument> borrowedDocuments, String status) {
+    public Borrow(LocalDate borrowDate, List<BorrowDetails> borrowDetailsList, String status) {
         this.borrowDate = borrowDate;
-        this.borrowedDocuments = borrowedDocuments;
+        this.borrowDetailsList = borrowDetailsList;
         this.status = status;
     }
 
     public int getTotalDocuments() {
-        return borrowedDocuments.size();
+        return borrowDetailsList.size();
     }
 
     public void updateStatus(String status) {

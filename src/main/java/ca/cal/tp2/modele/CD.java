@@ -1,24 +1,26 @@
 package ca.cal.tp2.modele;
 
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
 import java.time.LocalDate;
 
+@Entity
+@NoArgsConstructor
+@Getter
 public class CD extends Document {
-    private final int duration;
-    private final String genre;
+    @Column(name = "DURATION")
+    private int duration;
+
+    @Column(name = "GENRE")
+    private String genre;
+
     private static final int BORROW_DURATION = 2;
 
     public CD(String title, String author, LocalDate datePublished, int duration, String genre) {
         super(title, author, datePublished);
         this.duration = duration;
         this.genre = genre;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public String getGenre() {
-        return genre;
     }
 
     public static int getBorrowDuration() {

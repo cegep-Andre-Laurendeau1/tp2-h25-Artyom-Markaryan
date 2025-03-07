@@ -1,24 +1,26 @@
 package ca.cal.tp2.modele;
 
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
 import java.time.LocalDate;
 
+@Entity
+@NoArgsConstructor
+@Getter
 public class Book extends Document {
-    private final String editor;
-    private final int pages;
+    @Column(name = "EDITOR")
+    private String editor;
+
+    @Column(name = "PAGES")
+    private int pages;
+
     private static final int BORROW_DURATION = 3;
 
     public Book(String title, String author, LocalDate datePublished, String editor, int pages) {
         super(title, author, datePublished);
         this.editor = editor;
         this.pages = pages;
-    }
-
-    public String getEditor() {
-        return editor;
-    }
-
-    public int getPages() {
-        return pages;
     }
 
     public static int getBorrowDuration() {

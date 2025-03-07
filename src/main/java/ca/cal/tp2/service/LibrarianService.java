@@ -27,4 +27,8 @@ public class LibrarianService {
     public void addDocument(Document document) throws DatabaseException {
         documentRepository.save(document);
     }
+
+    public Document getDocumentById(int id) throws DatabaseException {
+        return documentRepository.findById(id);
+    }
 }
