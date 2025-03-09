@@ -6,10 +6,10 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "BORROWDETAILS")
+@Table(name = "BORROWEDDOCUMENTS")
 @NoArgsConstructor
 @Getter
-public class BorrowDetails {
+public class BorrowedDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -34,7 +34,9 @@ public class BorrowDetails {
     @Column(name = "STATUS")
     private String status;
 
-    public BorrowDetails(LocalDate borrowDate, LocalDate dueDate, LocalDate returnDate, String status) {
+    public BorrowedDocument(Borrow borrow, Document document, LocalDate borrowDate, LocalDate dueDate, LocalDate returnDate, String status) {
+        this.borrow = borrow;
+        this.document = document;
         this.borrowDate = borrowDate;
         this.dueDate = dueDate;
         this.returnDate = returnDate;

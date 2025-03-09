@@ -18,7 +18,7 @@ public abstract class Document {
     protected long id;
 
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    protected List<BorrowDetails> borrowDetailsList = new ArrayList<>();
+    protected List<BorrowedDocument> borrowedDocumentsList = new ArrayList<>();
 
     @Column(name = "TITLE")
     protected String title;

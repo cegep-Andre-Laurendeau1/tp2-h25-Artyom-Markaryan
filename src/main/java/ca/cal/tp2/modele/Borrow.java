@@ -21,7 +21,7 @@ public class Borrow {
     private Borrower borrower;
 
     @OneToMany(mappedBy = "borrow", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BorrowDetails> borrowDetailsList = new ArrayList<>();
+    private List<BorrowedDocument> borrowedDocumentsList = new ArrayList<>();
 
     @Column(name = "BORROWDATE")
     private LocalDate borrowDate;
@@ -29,14 +29,14 @@ public class Borrow {
     @Column(name = "STATUS")
     private String status;
 
-    public Borrow(LocalDate borrowDate, List<BorrowDetails> borrowDetailsList, String status) {
+    public Borrow(Borrower borrower, LocalDate borrowDate, String status) {
+        this.borrower = borrower;
         this.borrowDate = borrowDate;
-        this.borrowDetailsList = borrowDetailsList;
         this.status = status;
     }
 
     public int getTotalDocuments() {
-        return borrowDetailsList.size();
+        return borrowedDocumentsList.size();
     }
 
     public void updateStatus(String status) {
