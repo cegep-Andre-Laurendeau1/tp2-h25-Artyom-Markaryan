@@ -20,22 +20,22 @@ public class Main {
             librarianService.addDocument(
                 new Book("Livre Exemple", "Auteur", LocalDate.of(2025, 1, 1), "Éditeur", 100)
             );
-            System.out.println(librarianService.getDocumentById(1));
             librarianService.addDocument(
                 new CD("CD Exemple", "Artiste", LocalDate.of(2025, 1, 1), 240, "Acoustique")
             );
-            System.out.println(librarianService.getDocumentById(2));
             librarianService.addDocument(
                 new DVD("DVD Exemple", "Directeur", LocalDate.of(2025, 1, 1), 7200, 10)
             );
-            System.out.println(librarianService.getDocumentById(3));
+            System.out.println(librarianService.getDocumentsByYearPublished(2025));
+            System.out.println(librarianService.getDocumentsByTitle("Livre"));
+            System.out.println(librarianService.getDocumentsByAuthor("Artiste"));
             borrowerService.addBorrower(
                 new Borrower("Emprunteur", "Exemple", "courriel@exemple.com", "000-000-0000")
             );
             System.out.println(borrowerService.getBorrower(2));
         }
         catch (DatabaseException e) {
-            System.out.println("Erreur avec la base de données: " + e.getMessage());
+            System.err.println("Erreur au niveau de la base de données: " + e.getMessage());
         }
 
         Thread.currentThread().join();
