@@ -23,7 +23,8 @@ public class DVD extends Document {
         this.rating = rating;
     }
 
-    public static int getBorrowDuration() {
+    @Override
+    public int getBorrowDuration() {
         return BORROW_DURATION;
     }
 

@@ -23,7 +23,8 @@ public class CD extends Document {
         this.genre = genre;
     }
 
-    public static int getBorrowDuration() {
+    @Override
+    public int getBorrowDuration() {
         return BORROW_DURATION;
     }
 

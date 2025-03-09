@@ -23,7 +23,8 @@ public class Book extends Document {
         this.pages = pages;
     }
 
-    public static int getBorrowDuration() {
+    @Override
+    public int getBorrowDuration() {
         return BORROW_DURATION;
     }
 

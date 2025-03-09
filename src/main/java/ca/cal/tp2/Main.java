@@ -33,6 +33,7 @@ public class Main {
                 new Borrower("Emprunteur", "Exemple", "courriel@exemple.com", "000-000-0000")
             );
             System.out.println(borrowerService.getBorrower(2));
+            borrowerService.borrowDocuments(librarianService.getDocumentsByTitle("Livre"));
         }
         catch (DatabaseException e) {
             System.err.println("Erreur au niveau de la base de données: " + e.getMessage());

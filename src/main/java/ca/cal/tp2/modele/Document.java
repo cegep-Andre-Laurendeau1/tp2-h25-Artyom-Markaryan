@@ -34,4 +34,6 @@ public abstract class Document {
         this.author = author;
         this.datePublished = datePublished;
     }
+
+    public abstract int getBorrowDuration();
 }

@@ -3,12 +3,14 @@ package ca.cal.tp2.modele;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "BORROWEDDOCUMENTS")
 @NoArgsConstructor
 @Getter
+@Setter
 public class BorrowedDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,10 +42,6 @@ public class BorrowedDocument {
         this.borrowDate = borrowDate;
         this.dueDate = dueDate;
         this.returnDate = returnDate;
-        this.status = status;
-    }
-
-    public void updateStatus(String status) {
         this.status = status;
     }
 }
