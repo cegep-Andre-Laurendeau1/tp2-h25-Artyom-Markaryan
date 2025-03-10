@@ -44,4 +44,15 @@ public class BorrowedDocument {
         this.returnDate = returnDate;
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Document emprunté {" +
+                " " + this.document.toString() +
+                ", Date d'emprunt: " + this.borrowDate +
+                ", Date d'échéance: " + this.dueDate +
+                ", Date de retour: " + this.returnDate +
+                ", Statut: " + this.status +
+                " }";
+    }
 }

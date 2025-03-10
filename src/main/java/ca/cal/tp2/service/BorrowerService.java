@@ -41,6 +41,7 @@ public class BorrowerService {
             );
             borrow.getBorrowedDocumentsList().add(borrowedDocument);
         }
+        borrower.getBorrowsList().add(borrow);
         borrowRepository.save(borrow);
         return true;
     }
@@ -50,5 +51,9 @@ public class BorrowerService {
             documentRepository.countDocumentCopies(document.getId()),
             borrowRepository.countBorrowedCopies(document.getId())
         );
+    }
+
+    public List<Borrow> getBorrowsList(Borrower borrower) {
+        return borrower.getBorrowsList();
     }
 }

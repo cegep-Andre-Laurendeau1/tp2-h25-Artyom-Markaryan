@@ -3,6 +3,7 @@ package ca.cal.tp2.modele;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 @Table(name = "BORROWS")
 @NoArgsConstructor
 @Getter
+@Setter
 public class Borrow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,11 +37,12 @@ public class Borrow {
         this.status = status;
     }
 
-    public int getTotalDocuments() {
-        return borrowedDocumentsList.size();
-    }
-
-    public void updateStatus(String status) {
-        this.status = status;
+    @Override
+    public String toString() {
+        return "Emprunt {" +
+                " " + borrowedDocumentsList +
+                ", Date: " + this.borrowDate +
+                ", Statut: " + this.status +
+                " }";
     }
 }

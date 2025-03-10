@@ -47,6 +47,7 @@ public class Main {
             System.out.println("Emprunt approuvé: " +
                 borrowerService.borrowDocuments(exampleBorrower, wishlist)
             );
+            System.out.println(borrowerService.getBorrowsList(exampleBorrower));
         }
         catch (DatabaseException e) {
             System.err.println("Erreur au niveau de la base de données: " + e.getMessage());
