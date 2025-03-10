@@ -35,4 +35,17 @@ public class BorrowRepository implements Repository<Borrow> {
             throw new DatabaseException(e.getMessage());
         }
     }
+
+    public long countBorrowedCopies(long documentId) throws DatabaseException {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(b) FROM BorrowedDocument b WHERE b.document.id = :documentId", Long.class
+            );
+            query.setParameter("documentId", documentId);
+            return query.getSingleResult();
+        }
+        catch (RuntimeException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
 }

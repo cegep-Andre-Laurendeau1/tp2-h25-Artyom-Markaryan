@@ -5,6 +5,8 @@ import ca.cal.tp2.service.LibrarianService;
 import ca.cal.tp2.service.BorrowerService;
 import ca.cal.tp2.modele.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 import ca.cal.tp2.exception.DatabaseException;
 
 public class Main {
@@ -17,6 +19,7 @@ public class Main {
                 new Librarian("Bibliothécaire", "Exemple", "courriel@exemple.com", "000-000-0000")
             );
             System.out.println(librarianService.getLibrarian(1));
+
             librarianService.addDocument(
                 new Book("Livre Exemple", "Auteur", LocalDate.of(2025, 1, 1), "Éditeur", 100)
             );
@@ -29,11 +32,21 @@ public class Main {
             System.out.println(librarianService.getDocumentsByYearPublished(2025));
             System.out.println(librarianService.getDocumentsByTitle("Livre"));
             System.out.println(librarianService.getDocumentsByAuthor("Artiste"));
-            borrowerService.addBorrower(
-                new Borrower("Emprunteur", "Exemple", "courriel@exemple.com", "000-000-0000")
+
+            Borrower exampleBorrower = new Borrower(
+                "Emprunteur", "Exemple", "courriel@exemple.com", "000-000-0000"
             );
+            borrowerService.addBorrower(exampleBorrower);
             System.out.println(borrowerService.getBorrower(2));
-            borrowerService.borrowDocuments(librarianService.getDocumentsByTitle("Livre"));
+
+            List<Document> wishlist = new ArrayList<>();
+            wishlist.add(librarianService.getDocumentById(1));
+            System.out.println("Emprunt approuvé: " +
+                borrowerService.borrowDocuments(exampleBorrower, wishlist)
+            );
+            System.out.println("Emprunt approuvé: " +
+                borrowerService.borrowDocuments(exampleBorrower, wishlist)
+            );
         }
         catch (DatabaseException e) {
             System.err.println("Erreur au niveau de la base de données: " + e.getMessage());

@@ -75,4 +75,19 @@ public class DocumentRepository implements Repository<Document> {
             throw new DatabaseException(e.getMessage());
         }
     }
+
+    public long countDocumentCopies(long documentId) throws DatabaseException {
+        try (EntityManager em = emf.createEntityManager()) {
+            Document document = findById((int)documentId);
+            TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(*) FROM Document d WHERE d.author = :author AND d.title = :title", Long.class
+            );
+            query.setParameter("author", document.getAuthor());
+            query.setParameter("title", document.getTitle());
+            return query.getSingleResult();
+        }
+        catch (RuntimeException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
 }

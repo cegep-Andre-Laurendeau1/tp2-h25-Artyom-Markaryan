@@ -4,6 +4,7 @@ import ca.cal.tp2.modele.BorrowedDocument;
 import ca.cal.tp2.modele.Borrower;
 import ca.cal.tp2.persistance.BorrowerRepository;
 import ca.cal.tp2.persistance.BorrowRepository;
+import ca.cal.tp2.persistance.DocumentRepository;
 import ca.cal.tp2.exception.DatabaseException;
 import java.util.List;
 import ca.cal.tp2.modele.Document;
@@ -13,10 +14,12 @@ import ca.cal.tp2.modele.Borrow;
 public class BorrowerService {
     private final BorrowerRepository borrowerRepository;
     private final BorrowRepository borrowRepository;
+    private final DocumentRepository documentRepository;
 
     public BorrowerService() {
         this.borrowerRepository = new BorrowerRepository();
         this.borrowRepository = new BorrowRepository();
+        this.documentRepository = new DocumentRepository();
     }
 
     public void addBorrower(Borrower borrower) throws DatabaseException {
@@ -27,11 +30,11 @@ public class BorrowerService {
         return borrowerRepository.findById(id);
     }
 
-    public void borrowDocuments(List<Document> documents) throws DatabaseException {
+    public boolean borrowDocuments(Borrower borrower, List<Document> documents) throws DatabaseException {
         LocalDate now = LocalDate.now();
-        Borrower borrower = borrowerRepository.findById(2);
         Borrow borrow = new Borrow(borrower, now, "En attente");
         for (Document document : documents) {
+            if (getCopiesAvailable(document) <= 0) return false;
             int borrowDuration = document.getBorrowDuration();
             BorrowedDocument borrowedDocument = new BorrowedDocument(
                 borrow, document, now, now.plusWeeks(borrowDuration), null, "En attente"
@@ -39,6 +42,13 @@ public class BorrowerService {
             borrow.getBorrowedDocumentsList().add(borrowedDocument);
         }
         borrowRepository.save(borrow);
-        // TODO: Vérifier s'il y a des exemplaires disponibles pour cet emprunt
+        return true;
+    }
+
+    private long getCopiesAvailable(Document document) throws DatabaseException {
+        return Math.subtractExact(
+            documentRepository.countDocumentCopies(document.getId()),
+            borrowRepository.countBorrowedCopies(document.getId())
+        );
     }
 }
